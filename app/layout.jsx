@@ -1,11 +1,18 @@
 import GlobalProvider from "@/components/Application/GlobalProvider";
 import "./globals.css";
-import { Assistant } from 'next/font/google'
+import { Inter, Playfair_Display } from 'next/font/google'
 import { ToastContainer } from 'react-toastify';
-const assistantFont = Assistant({
-  weight: ['400', '500', '600', '700', '800'],
+const interFont = Inter({
   subsets: ['latin'],
-  display: 'swap'
+  display: 'swap',
+  variable: '--font-geist-sans'
+})
+
+const playfairFont = Playfair_Display({
+  weight: ['400', '500', '600', '700'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-heading'
 })
 
 export const metadata = {
@@ -17,7 +24,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${assistantFont.className} antialiased`}
+        className={`${interFont.variable} ${playfairFont.variable} font-sans antialiased`}
       >
         <GlobalProvider>
           <ToastContainer />
