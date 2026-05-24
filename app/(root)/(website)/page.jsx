@@ -1,5 +1,7 @@
 import FeaturedProduct from '@/components/Application/Website/FeaturedProduct'
 import Testimonial from '@/components/Application/Website/Testimonial'
+import Newsletter from '@/components/Application/Website/Newsletter'
+import TrustBadges from '@/components/Application/Website/TrustBadges'
 import Image from 'next/image'
 import Link from 'next/link'
 import { WEBSITE_SHOP } from '@/routes/WebsiteRoute'
@@ -326,6 +328,8 @@ const Home = () => {
 
       <Testimonial />
 
+      <TrustBadges />
+
       <section className='lg:px-32 px-4 py-14'>
         <div className='flex items-center justify-between mb-8'>
           <div>
@@ -374,21 +378,7 @@ const Home = () => {
         </div>
       </section>
 
-      <section className='lg:px-32 px-4 pb-16'>
-        <div className='rounded-3xl border border-border/60 bg-[linear-gradient(120deg,_#fff7ed,_#eef2ff)] p-10 lg:p-14 flex flex-col lg:flex-row items-center justify-between gap-6'>
-          <div>
-            <p className='text-xs uppercase tracking-[0.3em] text-muted-foreground'>Members only</p>
-            <h2 className='text-3xl sm:text-4xl font-semibold mt-2'>Join Trendy Steps Club</h2>
-            <p className='text-sm text-muted-foreground mt-2 max-w-xl'>Get early access to drops, member-only pricing, and exclusive training edits. Checkout requires an account, so sign up to unlock offers.</p>
-          </div>
-          <Link
-            href='/auth/register'
-            className='px-6 py-3 rounded-full bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition'
-          >
-            Create account
-          </Link>
-        </div>
-      </section>
+      <Newsletter />
     </>
   )
 }
