@@ -71,30 +71,50 @@ const Footer = () => {
                 </div>
 
                 <div>
-                    <h4 className='text-sm font-semibold uppercase tracking-[0.3em] mb-4 text-white/80'>Support</h4>
+                    <h4 className='text-sm font-semibold uppercase tracking-[0.3em] mb-4 text-white/80'>Help</h4>
                     <ul className='space-y-3 text-sm text-white/70'>
+                        <li>
+                            <Link href='/contact-us' className='hover:text-white'>Contact Us</Link>
+                        </li>
+                        <li>
+                            <Link href='/faq' className='hover:text-white'>FAQ</Link>
+                        </li>
+                        <li>
+                            <Link href='/shipping-returns' className='hover:text-white'>Shipping & Returns</Link>
+                        </li>
                         <li>
                             <Link href={USER_ORDERS} className='hover:text-white'>Track Order</Link>
                         </li>
                         <li>
-                            <Link href={WEBSITE_REGISTER} className='hover:text-white'>Create Account</Link>
-                        </li>
-                        <li>
-                            <Link href={WEBSITE_LOGIN} className='hover:text-white'>Sign In</Link>
-                        </li>
-                        <li>
                             <Link href={USER_DASHBOARD} className='hover:text-white'>My Account</Link>
-                        </li>
-                        <li>
-                            <Link href='/terms-and-conditions' className='hover:text-white'>Terms & Conditions</Link>
                         </li>
                     </ul>
                 </div>
 
                 <div>
-                    <h4 className='text-sm font-semibold uppercase tracking-[0.3em] mb-4 text-white/80'>Payments</h4>
-                    <p className='text-sm text-white/70'>Stripe and SSLCOMMERZ</p>
-                    <p className='text-sm text-white/70 mt-2'>Pathao and Steadfast delivery</p>
+                    <h4 className='text-sm font-semibold uppercase tracking-[0.3em] mb-4 text-white/80'>Company</h4>
+                    <ul className='space-y-3 text-sm text-white/70'>
+                        <li>
+                            <Link href='/about-us' className='hover:text-white'>About Us</Link>
+                        </li>
+                        <li>
+                            <Link href='/blog' className='hover:text-white'>Journal</Link>
+                        </li>
+                        <li>
+                            <Link href={WEBSITE_LOGIN} className='hover:text-white'>Sign In</Link>
+                        </li>
+                        <li>
+                            <Link href={WEBSITE_REGISTER} className='hover:text-white'>Create Account</Link>
+                        </li>
+                        <li>
+                            <Link href='/privacy-policy' className='hover:text-white'>Privacy Policy</Link>
+                        </li>
+                        <li>
+                            <Link href='/terms-and-conditions' className='hover:text-white'>Terms & Conditions</Link>
+                        </li>
+                    </ul>
+                    <p className='text-sm text-white/70 mt-5'>Stripe and SSLCOMMERZ payments</p>
+                    <p className='text-sm text-white/70 mt-1'>Pathao and Steadfast delivery</p>
 
                     <div className='flex gap-4 mt-6'>
                         <Link href=''>
