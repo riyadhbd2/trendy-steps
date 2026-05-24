@@ -1,58 +1,96 @@
 import WebsiteBreadcrumb from '@/components/Application/Website/WebsiteBreadcrumb'
+import Link from 'next/link'
 import React from 'react'
+
+export const metadata = {
+    title: 'Privacy Policy | Trendy Steps',
+    description: 'How Trendy Steps collects, uses, and protects personal information across our website, payments, and delivery partners.'
+}
 
 const breadcrumb = {
     title: 'Privacy Policy',
-    links: [
-        { label: 'Privacy Policy' },
-    ]
+    links: [{ label: 'Privacy Policy' }]
 }
+
+const sections = [
+    {
+        heading: '1. Information we collect',
+        items: [
+            'Account details such as your name, email, phone number, and shipping addresses provided during registration or checkout.',
+            'Payment details processed by Stripe and SSLCOMMERZ. We never store full card numbers on our own servers.',
+            'Order history, product reviews, and support conversations that help us serve you better.',
+            'Usage data such as device type, IP address, pages visited, and approximate location, captured via cookies and analytics.'
+        ]
+    },
+    {
+        heading: '2. How we use your data',
+        items: [
+            'Process orders, handle deliveries via Pathao and Steadfast, and provide after-sale support.',
+            'Personalise product recommendations and improve our catalogue and site experience.',
+            'Send transactional updates (order confirmations, shipment tracking) and, with your consent, marketing offers.',
+            'Detect fraud, prevent abuse, and meet legal or regulatory requirements in Bangladesh.'
+        ]
+    },
+    {
+        heading: '3. Sharing with third parties',
+        items: [
+            'Payment processors (Stripe, SSLCOMMERZ) for secure transactions.',
+            'Delivery partners (Pathao, Steadfast) for fulfilment.',
+            'Cloud and analytics providers (Cloudinary, hosting, Upstash) that support core site functions under strict data protection terms.',
+            'Government or law enforcement when required by valid legal process.'
+        ]
+    },
+    {
+        heading: '4. Your rights',
+        items: [
+            'Access, update, or delete your account information from the My Account dashboard or by contacting support.',
+            'Opt out of marketing emails any time using the unsubscribe link in our newsletters.',
+            'Request a copy of the personal data we hold about you.'
+        ]
+    },
+    {
+        heading: '5. Data retention & security',
+        items: [
+            'We retain order and customer data for as long as needed to provide services and meet tax and accounting obligations.',
+            'Transmissions are encrypted with HTTPS. Passwords are hashed; we never store them in plain text.',
+            'Despite our safeguards, no online service is 100% secure — please use a strong unique password and keep your account credentials private.'
+        ]
+    }
+]
 
 const PrivacyPolicy = () => {
     return (
         <div>
             <WebsiteBreadcrumb props={breadcrumb} />
-            <div className='lg:px-40 px-5 py-20'>
-                <h1 className='text-xl font-semibold mb-3'>Privacy Policy</h1>
-                <p>
-                    At E-store, we are committed to protecting your privacy and ensuring that your personal information is handled in a safe and responsible manner.
+            <article className='lg:px-32 px-4 py-12 max-w-4xl mx-auto'>
+                <p className='text-xs uppercase tracking-[0.3em] text-muted-foreground'>Effective date</p>
+                <h1 className='text-3xl lg:text-4xl font-semibold mt-2'>Privacy Policy</h1>
+                <p className='text-sm text-muted-foreground mt-1'>Last updated: 24 May 2026</p>
+
+                <p className='mt-6 text-muted-foreground leading-relaxed'>
+                    At Trendy Steps, we treat your data the same way we treat your orders — with care and accountability. This policy explains what we collect, how we use it, and the choices you have. By using <Link href='/' className='text-primary underline underline-offset-2'>trendysteps.com</Link>, you agree to the practices described below.
                 </p>
 
-                <p className='mt-3'>
-                    This Privacy Policy outlines how we collect, use, and safeguard your information when you visit our website or make a purchase.
-                </p>
+                <div className='mt-10 space-y-10'>
+                    {sections.map((section) => (
+                        <section key={section.heading}>
+                            <h2 className='text-xl font-semibold'>{section.heading}</h2>
+                            <ul className='list-disc ps-6 mt-3 space-y-2 text-sm text-muted-foreground'>
+                                {section.items.map((item) => (
+                                    <li key={item}>{item}</li>
+                                ))}
+                            </ul>
+                        </section>
+                    ))}
 
-                <p className='mt-5'>Information We Collect:</p>
-                <ul className='list-disc ps-10 mt-3'>
-                    <li><b>Personal Information:</b> Such as your name, email address, phone number, and shipping/billing addresses, provided during account registration or checkout.</li>
-                    <li><b>Payment Details:</b> Collected securely through encrypted payment gateways.</li>
-                    <li><b>Usage Data:</b> Including your browser type, IP address, pages visited, and time spent on the site to help us improve user experience.</li>
-                </ul>
-
-                <p className='mt-5'>How We Use Your Information:</p>
-                <ul className='list-disc ps-10 mt-3'>
-                    <li>To process your orders and provide customer support.</li>
-                    <li>To personalize your shopping experience and improve our services.</li>
-                    <li>To send order updates, promotional offers, and newsletters (you may opt out at any time).</li>
-                    <li>To ensure our website is secure and functioning properly.</li>
-                </ul>
-
-                <p className='mt-5'>
-                    We do not sell, rent, or share your personal information with third parties, except when necessary to fulfill your order or comply with legal obligations.
-                </p>
-
-                <p className='mt-3'>
-                    By using our website, you consent to the practices outlined in this Privacy Policy. We may update this policy from time to time, and any changes will be reflected on this page.
-                </p>
-
-                <p className='mt-3'>
-                    If you have any questions or concerns regarding our Privacy Policy, please contact our support team.
-                </p>
-
-                <p className='mt-3'>
-                    Thank you for trusting E-store. Your privacy is important to us.
-                </p>
-            </div>
+                    <section>
+                        <h2 className='text-xl font-semibold'>6. Contact us</h2>
+                        <p className='text-sm text-muted-foreground mt-3'>
+                            For privacy questions or data requests, email <Link href='mailto:support@trendysteps.com' className='text-primary underline underline-offset-2'>support@trendysteps.com</Link> or write to us at Trendy Steps, Dhaka, Bangladesh. We respond within five business days.
+                        </p>
+                    </section>
+                </div>
+            </article>
         </div>
     )
 }

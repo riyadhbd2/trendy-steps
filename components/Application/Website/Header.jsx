@@ -1,232 +1,182 @@
 'use client'
 import { USER_DASHBOARD, WEBSITE_HOME, WEBSITE_LOGIN, WEBSITE_SHOP } from '@/routes/WebsiteRoute'
-import Image from 'next/image'
 import Link from 'next/link'
+import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
-import logo from '@/public/assets/images/main-logo.png'
-import { IoIosSearch } from "react-icons/io";
+import { IoIosSearch } from 'react-icons/io'
 import Cart from './Cart'
-import { VscAccount } from "react-icons/vsc";
+import { VscAccount } from 'react-icons/vsc'
 import { useSelector } from 'react-redux'
 import { Avatar, AvatarImage } from '@/components/ui/avatar'
 import userIcon from '@/public/assets/images/user.png'
-import { IoMdClose } from "react-icons/io";
-import { IoChevronDown } from "react-icons/io5";
-
-import { HiMiniBars3 } from "react-icons/hi2";
+import logo from '@/public/assets/images/logo.jpg'
+import { IoMdClose } from 'react-icons/io'
+import { IoChevronDown } from 'react-icons/io5'
+import { HiMiniBars3 } from 'react-icons/hi2'
 import Search from './Search'
-
 
 const Header = () => {
     const auth = useSelector(store => store.authStore.auth)
     const [isMobileMenu, setIsMobileMenu] = useState(false)
     const [showSearch, setShowSearch] = useState(false)
-    const [isBrandsOpen, setIsBrandsOpen] = useState(false)
-    const [isAccessoriesOpen, setIsAccessoriesOpen] = useState(false)
+    const [activeDropdown, setActiveDropdown] = useState(null)
 
-    const brandLinks = [
-        { label: 'Nike', href: `${WEBSITE_SHOP}?brand=nike` },
-        { label: 'Adidas', href: `${WEBSITE_SHOP}?brand=adidas` },
-        { label: 'Puma', href: `${WEBSITE_SHOP}?brand=puma` },
-        { label: 'Levi\'s', href: `${WEBSITE_SHOP}?brand=levis` },
-        { label: 'H&M', href: `${WEBSITE_SHOP}?brand=hm` }
-    ]
-
-    const accessoriesLinks = [
-        { label: 'Bags', href: `${WEBSITE_SHOP}?category=bags` },
-        { label: 'Caps & Hats', href: `${WEBSITE_SHOP}?category=caps` },
-        { label: 'Socks', href: `${WEBSITE_SHOP}?category=socks` },
-        { label: 'Belts', href: `${WEBSITE_SHOP}?category=belts` },
-        { label: 'Watches', href: `${WEBSITE_SHOP}?category=watches` }
+    const collectionLinks = [
+        { label: 'Running', note: 'Road and track', href: `${WEBSITE_SHOP}?category=running` },
+        { label: 'Training', note: 'Gym and studio', href: `${WEBSITE_SHOP}?category=training` },
+        { label: 'Lifestyle', note: 'Everyday wear', href: `${WEBSITE_SHOP}?category=lifestyle` },
+        { label: 'Outdoor', note: 'Trail ready', href: `${WEBSITE_SHOP}?category=outdoor` },
+        { label: 'Court', note: 'Hoops and court', href: `${WEBSITE_SHOP}?category=court` },
+        { label: 'Kids', note: 'Junior sizes', href: `${WEBSITE_SHOP}?category=kids` },
+        { label: 'Accessories', note: 'Bags and socks', href: `${WEBSITE_SHOP}?category=accessories` },
+        { label: 'Sale', note: 'Limited drops', href: `${WEBSITE_SHOP}?tag=sale` }
     ]
 
     useEffect(() => {
         if (!isMobileMenu) {
-            setIsBrandsOpen(false)
-            setIsAccessoriesOpen(false)
+            setActiveDropdown(null)
         }
     }, [isMobileMenu])
+
     return (
-        <div className='bg-white border- lg:px-32 px-4'>
-            <div className='flex items-center justify-between lg:py-3 gap-6'>
-                <Link href={WEBSITE_HOME}>
-                    <Image
-                        src={logo}
-                        width={150}
-                        height={100}
-                        alt='logo'
-                        className='lg:w-14'
-                    />
-                </Link>
+        <header className='sticky top-0 z-50 border-b border-border/60 bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/70'>
+            <div className='hidden lg:block border-b border-border/50'>
+                <div className='lg:px-32 px-4 py-2 flex items-center justify-between text-xs text-muted-foreground'>
+                    <p className='tracking-[0.25em] uppercase'>Premium sports and lifestyle footwear</p>
+                    <div className='flex items-center gap-4'>
+                        <span>VAT included</span>
+                        <span>EU sizing</span>
+                        <span>Pathao and Steadfast delivery</span>
+                    </div>
+                </div>
+            </div>
 
-                <nav className={`lg:relative lg:w-auto lg:h-auto lg:top-0 lg:left-0 lg:p-0 lg:flex-1 bg-white fixed z-50 top-0 w-full h-screen transition-all ${isMobileMenu ? 'left-0' : '-left-full'}`}>
-
-
-                    <div className='lg:hidden flex justify-between items-center bg-gray-50 py-3 border-b px-3'>
-
+            <div className='lg:px-32 px-4'>
+                <div className='flex items-center justify-between lg:py-4 py-3 gap-6'>
+                    <Link href={WEBSITE_HOME} className='flex items-center gap-3'>
                         <Image
                             src={logo}
-                            width={383}
-                            height={146}
-                            alt='logo'
-                            className='lg:w-32 w-24'
+                            alt='Trendy Steps'
+                            width={44}
+                            height={44}
+                            priority
+                            className='w-11 h-11 rounded-full object-cover border border-border/60'
                         />
+                        <div className='hidden sm:block'>
+                            <p className='text-lg font-semibold tracking-wide leading-tight'>Trendy Steps</p>
+                            <p className='text-[10px] uppercase tracking-[0.3em] text-muted-foreground'>Footwear Studio</p>
+                        </div>
+                    </Link>
 
-                        <button type='button' onClick={() => {
-                            setIsMobileMenu(false)
-                            setIsBrandsOpen(false)
-                            setIsAccessoriesOpen(false)
-                        }} >
-                            <IoMdClose size={25} className='text-gray-500 hover:text-primary' />
-                        </button>
-
-                    </div>
-
-                    {/* Middle Part */}
-                    <ul className='lg:flex lg:justify-center lg:items-center gap-10 px-3'>
-                        <li
-                            className='text-gray-600 hover:text-primary hover:font-semibold relative'
-                            onMouseEnter={() => setIsBrandsOpen(true)}
-                            onMouseLeave={() => setIsBrandsOpen(false)}
-                        >
+                    <nav
+                        className={`lg:relative lg:w-auto lg:h-auto lg:top-0 lg:left-0 lg:p-0 lg:flex-1 bg-background fixed z-50 top-0 w-full h-screen transition-all duration-300 ${isMobileMenu ? 'left-0' : '-left-full'}`}
+                    >
+                        <div className='lg:hidden flex justify-between items-center bg-muted/40 py-4 border-b px-4'>
+                            <p className='text-sm font-semibold tracking-[0.2em] uppercase text-muted-foreground'>Menu</p>
                             <button
                                 type='button'
-                                className='flex items-center gap-2 py-2 w-full'
-                                onClick={() => setIsBrandsOpen(prev => !prev)}
-                                aria-haspopup='listbox'
-                                aria-expanded={isBrandsOpen}
+                                onClick={() => {
+                                    setIsMobileMenu(false)
+                                    setActiveDropdown(null)
+                                }}
                             >
-                                <span>All Brands</span>
-                                <IoChevronDown className={`transition-transform duration-200 ${isBrandsOpen ? 'rotate-180 text-primary' : ''}`} size={14} />
+                                <IoMdClose size={25} className='text-foreground/70 hover:text-primary' />
                             </button>
-                            <div
-                                className={`${isBrandsOpen ? 'block' : 'hidden'} mt-2 lg:mt-0 lg:absolute lg:top-full lg:left-0 lg:min-w-[220px] bg-white border border-gray-100 rounded-lg shadow-sm lg:shadow-lg lg:py-2 z-50`}
+                        </div>
+
+                        <ul className='lg:flex lg:justify-center lg:items-center gap-8 px-4 lg:px-0 lg:pt-0 pt-6'>
+                            <li className='text-foreground/80 hover:text-primary hover:font-semibold'>
+                                <Link href={`${WEBSITE_SHOP}?tag=new`} className='block py-2'>
+                                    New In
+                                </Link>
+                            </li>
+                            <li
+                                className='text-foreground/80 hover:text-primary hover:font-semibold relative'
+                                onMouseEnter={() => setActiveDropdown('collections')}
+                                onMouseLeave={() => setActiveDropdown(null)}
                             >
-                                <ul className='flex flex-col py-2'>
-                                    {brandLinks.map((brand) => (
-                                        <li key={brand.label}>
+                                <button
+                                    type='button'
+                                    className='flex items-center gap-2 py-2 w-full'
+                                    onClick={() => setActiveDropdown(activeDropdown === 'collections' ? null : 'collections')}
+                                    aria-haspopup='menu'
+                                    aria-expanded={activeDropdown === 'collections'}
+                                >
+                                    <span>Collections</span>
+                                    <IoChevronDown className={`transition-transform duration-200 ${activeDropdown === 'collections' ? 'rotate-180 text-primary' : ''}`} size={14} />
+                                </button>
+                                <div
+                                    className={`${activeDropdown === 'collections' ? 'block' : 'hidden'} mt-2 lg:mt-0 lg:absolute lg:top-full lg:left-1/2 lg:-translate-x-1/2 lg:min-w-[520px] bg-background border border-border/70 rounded-2xl shadow-xl lg:py-5 z-50`}
+                                >
+                                    <div className='grid sm:grid-cols-2 gap-4 px-4'>
+                                        {collectionLinks.map((item) => (
                                             <Link
-                                                href={brand.href}
-                                                className='block px-4 py-2 text-sm text-gray-600 hover:text-primary hover:bg-gray-50'
-                                                onClick={() => {
-                                                    setIsBrandsOpen(false)
-                                                    setIsMobileMenu(false)
-                                                }}
-                                            >
-                                                {brand.label}
-                                            </Link>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        </li>
-                      
-                        <li className='text-gray-600 hover:text-primary hover:font-semibold'>
-                            <Link href="/about-us" className='block py-2'>
-                                New Arrival
-                            </Link>
-                        </li>
-                        <li className='text-gray-600 hover:text-primary hover:font-semibold'>
-                            <Link href={WEBSITE_SHOP} className='block py-2'>
-                                Running and Sportware
-                            </Link>
-                        </li>
-                        <li className='text-gray-600 hover:text-primary hover:font-semibold'>
-                            <Link href={`${WEBSITE_SHOP}?category=t-shirts`} className='block py-2'>
-                                Converse
-                            </Link>
-                        </li>
-                        <li className='text-gray-600 hover:text-primary hover:font-semibold'>
-                            <Link href={`${WEBSITE_SHOP}?category=hoodies`} className='block py-2'>
-                                Men and Women
-                            </Link>
-                        </li>
-                        <li className='text-gray-600 hover:text-primary hover:font-semibold'>
-                            <Link href={`${WEBSITE_SHOP}?category=overshized`} className='block py-2'>
-                                Slides
-                            </Link>
-                        </li>
-                        <li
-                            className='text-gray-600 hover:text-primary hover:font-semibold relative '
-                            onMouseEnter={() => setIsAccessoriesOpen(true)}
-                            onMouseLeave={() => setIsAccessoriesOpen(false)}
-                        >
-                            <button
-                                type='button'
-                                className='flex items-center gap-2 py-2 w-full'
-                                onClick={() => setIsAccessoriesOpen(prev => !prev)}
-                                aria-haspopup='listbox'
-                                aria-expanded={isAccessoriesOpen}
-                            >
-                                <span>Accessories</span>
-                                <IoChevronDown className={`transition-transform duration-200 ${isAccessoriesOpen ? 'rotate-180 text-primary' : ''}`} size={14} />
-                            </button>
-                            <div
-                                className={`${isAccessoriesOpen ? 'block' : 'hidden'} mt-2 lg:mt-0 lg:absolute lg:top-full lg:left-0 lg:min-w-[220px] bg-white border border-gray-100 rounded-lg shadow-sm lg:shadow-lg lg:py-2 z-50`}
-                            >
-                                <ul className='flex flex-col py-2'>
-                                    {accessoriesLinks.map((item) => (
-                                        <li key={item.label}>
-                                            <Link
+                                                key={item.label}
                                                 href={item.href}
-                                                className='block px-4 py-2 text-sm text-gray-600 hover:text-primary hover:bg-gray-50'
+                                                className='group rounded-xl border border-transparent hover:border-border/80 hover:bg-muted/40 transition-all p-3'
                                                 onClick={() => {
-                                                    setIsAccessoriesOpen(false)
+                                                    setActiveDropdown(null)
                                                     setIsMobileMenu(false)
                                                 }}
                                             >
-                                                {item.label}
+                                                <p className='font-semibold text-sm text-foreground group-hover:text-primary'>{item.label}</p>
+                                                <p className='text-xs text-muted-foreground'>{item.note}</p>
                                             </Link>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        </li>
-                        
-                    </ul>
-                </nav>
+                                        ))}
+                                    </div>
+                                </div>
+                            </li>
+                            <li className='text-foreground/80 hover:text-primary hover:font-semibold'>
+                                <Link href={`${WEBSITE_SHOP}?category=men`} className='block py-2'>
+                                    Men
+                                </Link>
+                            </li>
+                            <li className='text-foreground/80 hover:text-primary hover:font-semibold'>
+                                <Link href={`${WEBSITE_SHOP}?category=women`} className='block py-2'>
+                                    Women
+                                </Link>
+                            </li>
+                            <li className='text-foreground/80 hover:text-primary hover:font-semibold'>
+                                <Link href={`${WEBSITE_SHOP}?category=accessories`} className='block py-2'>
+                                    Accessories
+                                </Link>
+                            </li>
+                            <li className='text-foreground/80 hover:text-primary hover:font-semibold'>
+                                <Link href={`${WEBSITE_SHOP}?tag=best-seller`} className='block py-2'>
+                                    Best Sellers
+                                </Link>
+                            </li>
+                        </ul>
+                    </nav>
 
-
-                <div className='flex items-center gap-8'>
-                    <button type='button' onClick={() => setShowSearch(!showSearch)}>
-                        <IoIosSearch
-                            className='text-gray-500 hover:text-primary cursor-pointer'
-                            size={25}
-                        />
-                    </button>
-
-                    <Cart />
-
-                    {!auth
-                        ?
-                        <Link href={WEBSITE_LOGIN}>
-                            <VscAccount
-                                className='text-gray-500 hover:text-primary cursor-pointer'
-                                size={25}
-                            />
-                        </Link>
-                        :
-
-                        <Link href={USER_DASHBOARD}>
-                            <Avatar >
-                                <AvatarImage src={auth?.avatar?.url || userIcon.src} />
-                            </Avatar>
-                        </Link>
-
-                    }
-
-
-                        <button type='button' className='lg:hidden block' onClick={() => setIsMobileMenu(true)} >
-                            <HiMiniBars3 size={25} className='text-gray-500 hover:text-primary' />
+                    <div className='flex items-center gap-5'>
+                        <button type='button' onClick={() => setShowSearch(!showSearch)}>
+                            <IoIosSearch className='text-foreground/70 hover:text-primary' size={24} />
                         </button>
 
-                </div>
+                        <Cart />
 
+                        {!auth ? (
+                            <Link href={WEBSITE_LOGIN}>
+                                <VscAccount className='text-foreground/70 hover:text-primary' size={24} />
+                            </Link>
+                        ) : (
+                            <Link href={USER_DASHBOARD}>
+                                <Avatar>
+                                    <AvatarImage src={auth?.avatar?.url || userIcon.src} />
+                                </Avatar>
+                            </Link>
+                        )}
+
+                        <button type='button' className='lg:hidden block' onClick={() => setIsMobileMenu(true)}>
+                            <HiMiniBars3 size={25} className='text-foreground/70 hover:text-primary' />
+                        </button>
+                    </div>
+                </div>
             </div>
 
             <Search isShow={showSearch} />
-
-        </div>
+        </header>
     )
 }
 
